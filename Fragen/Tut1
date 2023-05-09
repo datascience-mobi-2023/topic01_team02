@@ -1,1 +1,1 @@
-
+In KNN vergleichen wir im test data set ja mehr als 1 data point mit allen test data points. Demnach erscheint eine Liste nicht sinnvoll. Sollten wir dafür ein multi-dimensional array (Distanzmatrix) nutzen in der wir auf der einen Achse die test data points und auf der anderen Achse die train data points haben oder gibt es weitere Möglichkeiten wie wir die K nearest neighbors so sturkturieren, dass wir für einen bestimmten K-Wert die most common neighbours finden? 
