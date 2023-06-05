@@ -33,3 +33,10 @@ train_data_pca = pca.transform(train_data_z)
 test_data_pca = pca.transform(test_data_z)
 
 print(train_data_pca)
+
+# Calculation of Euclidean Distance
+def euclidean_distance(row1, row2):
+ distance = 0
+ for i in range(len(row1)-1):
+    distance += (row1[i] - row2[i])**2
+ return np.sqrt(distance)
