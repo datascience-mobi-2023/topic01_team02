@@ -63,3 +63,23 @@ def most_common_label(labels_array):
     most_common = Counter(labels_array).most_common(1)
     return most_common[0][0]
 
+def main_KNN(test_point, train_data_points, train_data_points_labels, k):
+    
+    # Create an empty list of the euclidean distances
+    list_of_distances = []
+    
+    # calculate the euclidean distances between the train data points and the new test data point
+    for i in range(len(train_data_points)):
+        distance = euclidean_distance(test_point, train_data_points[i])
+        # add the euclidean distance to the list of euclidean distances
+        list_of_distances.append(distance)
+    
+    # Identify the most common label in the k nearest neighbours and return the predicted label
+    k_nearest_labels = labels_of_nearest_neighbours(np.array(list_of_distances), np.array(train_data_points_labels), k)
+    predicted_label = most_common_label(k_nearest_labels)
+    return predicted_label
+
+
+final_result = int(main_KNN(test_data_pca[5], train_data_pca, train_labels, k=9))
+
+print( "Real digit: " + str(test_labels[5]) + "; Predicted digit: " + str(final_result) )
