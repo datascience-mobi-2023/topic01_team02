@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
+from collections import Counter
 
 train_data = pd.read_csv("../mnist_train.csv")
 test_data = pd.read_csv("../mnist_test.csv")
