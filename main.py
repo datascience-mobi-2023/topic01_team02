@@ -40,3 +40,25 @@ def euclidean_distance(row1, row2):
  for i in range(len(row1)-1):
     distance += (row1[i] - row2[i])**2
  return np.sqrt(distance)
+
+def labels_of_nearest_neighbours(distances, labels, k):
+
+    # Reshape distances and labels from a row to a column
+    distances = distances.reshape(-1, 1)
+    labels = labels.reshape(-1, 1)
+
+     # Join the distances and labels together into an array and convert into a dataframe
+    distances_and_labels = np.concatenate((distances, labels), axis=1)
+    sorted_labels_df = pd.DataFrame(distances_and_labels, columns=['distance', 'label'])
+
+    # Sort euclidean distances and labels in the dataframe in ascending order and return the first k labels 
+    sorted_labels_df = sorted_labels_df.sort_values('distance')
+    return sorted_labels_df['label'].head(k).values
+
+
+def most_common_label(labels_array):
+
+    # Identify the most common label in k nearest neighbours
+    most_common = Counter(labels_array).most_common(1)
+    return most_common[0][0]
+
