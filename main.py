@@ -83,3 +83,5 @@ def main_KNN(test_point, train_data_points, train_data_points_labels, k):
 final_result = int(main_KNN(test_data_pca[5], train_data_pca, train_labels, k=9))
 
 print( "Real digit: " + str(test_labels[5]) + "; Predicted digit: " + str(final_result) )
+
+#Hallo 
