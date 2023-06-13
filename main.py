@@ -5,8 +5,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from collections import Counter
 
-train_data = pd.read_csv("../mnist_train.csv")
-test_data = pd.read_csv("../mnist_test.csv")
+train_data = pd.read_csv("C:/Users/maxab/Desktop/Digits/mnist_train.csv")
+test_data = pd.read_csv("C:/Users/maxab/Desktop/Digits/mnist_test.csv")
 
 train_labels = train_data.iloc[:,0]
 train_data = train_data.drop(['0'], axis=1)
@@ -33,8 +33,6 @@ pca.fit(test_data_z)
 train_data_pca = pca.transform(train_data_z)
 test_data_pca = pca.transform(test_data_z)
 
-print(train_data_pca)
-
 # Calculation of Euclidean Distance
 def euclidean_distance(row1, row2):
  distance = 0
@@ -56,7 +54,6 @@ def labels_of_nearest_neighbours(distances, labels, k):
     sorted_labels_df = sorted_labels_df.sort_values('distance')
     return sorted_labels_df['label'].head(k).values
 
-
 def most_common_label(labels_array):
 
     # Identify the most common label in k nearest neighbours
@@ -77,9 +74,24 @@ def main_KNN(test_point, train_data_points, train_data_points_labels, k):
     # Identify the most common label in the k nearest neighbours and return the predicted label
     k_nearest_labels = labels_of_nearest_neighbours(np.array(list_of_distances), np.array(train_data_points_labels), k)
     predicted_label = most_common_label(k_nearest_labels)
-    return predicted_label
+    return int(predicted_label)
+
+# Calculate accuracy
+def calc_accuracy(k):
+    ctr = 0
+    for i in range(len(test_labels)):
+        if main_KNN(test_data_pca[i], train_data_pca, train_labels, k) == test_labels[i]:
+            ctr += 1
+    accuracy = ctr / len(test_labels)
+    return accuracy 
 
 
-final_result = int(main_KNN(test_data_pca[5], train_data_pca, train_labels, k=9))
+# Identify best k-value
+list_of_accuracies = []
+for i in range(100):
+    list_of_accuracies.append(calc_accuracy(i))
 
-print( "Real digit: " + str(test_labels[5]) + "; Predicted digit: " + str(final_result) )
+highest_accuracy = max(list_of_accuracies)
+print("Best k-value: " + str(list_of_accuracies.index(highest_accuracy)) + " Accuracy: " + str(highest_accuracy))
+
+
