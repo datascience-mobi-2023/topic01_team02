@@ -5,8 +5,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from collections import Counter
 
-train_data = pd.read_csv("C:/Users/maxab/Desktop/Digits/mnist_train.csv")
-test_data = pd.read_csv("C:/Users/maxab/Desktop/Digits/mnist_test.csv")
+train_data = pd.read_csv("mnist_train.csv")
+test_data = pd.read_csv("mnist_test.csv")
 
 train_labels = train_data.iloc[:,0]
 train_data = train_data.drop(['0'], axis=1)
