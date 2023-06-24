@@ -70,3 +70,8 @@ autolabel(rects2)
 fig.tight_layout()
 
 plt.show()
+
+#----------------------------------------------------------------------------------------------------------------------------------
+
+table_of_predictions = pd.read_csv("knn_results.csv")
+
