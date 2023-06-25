@@ -43,35 +43,36 @@ def knn_kdtree(train_data_pca, test_data_pca, k, train_labels, testsize):
     return result
 
 results = []
-k_values = range(2, 21)
+accuracies = []
+# Test k values from 2 to 50
+k_values = range(2, 5)
 
 for k in k_values:
+    # Calculate knn with kdtree
     result = knn_kdtree(train_data_pca, test_data_pca, k, train_labels, 200)
     results.append(result)
 
-results_df = pd.DataFrame(results).transpose()
-results_df.insert(0, "Real Label", test_labels)  # Hinzufügen der Spalte für echte Testlabels
-results_df.columns = ["Real Label"] + list(k_values)  # Umbenennen der Spalten
-results_df.to_csv("knn_results.csv", index=False)
-
-
-accuracies = []
-# Test k values from 1 to 10
-for k in range(2, 11):
-    # Perform KNN classification
-    predictions = knn_kdtree(train_data_pca, test_data_pca, k, train_labels, 200)
-    
     # Calculate accuracy
-    accuracy = np.mean(predictions == test_labels[:len(predictions)]) * 100
+    accuracy = np.mean(result == test_labels[:len(result)]) * 100
     accuracies.append(accuracy)
     print("Accuracy for k =", k, "is", accuracy)
 
+# Create csv file with real labels and predicted labels with different k-values
+results_df = pd.DataFrame(results).transpose()
+results_df.insert(0, "Real Label", test_labels)  # Add column for real label
+results_df.columns = ["Real Label"] + list(k_values)  # Rename columns
+results_df.to_csv("knn_results.csv", index=False)
+    
+    
 # Find k with the highest accuracy
-best_k = np.argmax(accuracies) + 1
-best_accuracy = accuracies[best_k - 1]
+best_k = k_values[np.argmax(accuracies)]
+best_accuracy = accuracies[np.argmax(accuracies)]
 print("\nBest k:", best_k)
 print("Best accuracy:", best_accuracy)
 
+# Create csv file with k-values and accuracies
+accuracy_df = pd.DataFrame({"k": k_values, "Accuracy": accuracies})
+accuracy_df.to_csv("accuracy_results.csv", index=False)
 
 
 
