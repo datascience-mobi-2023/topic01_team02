@@ -1,9 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-own_acc = pd.read_csv("concat_accuracies.csv", names=['k', 'Accuracy'], skiprows=1, nrows=9)
-kdt_acc = pd.read_csv("accuracy_kd_scipy.csv", names=['k', 'Accuracy'], skiprows=1, nrows=9)
-cla_acc = pd.read_csv("accuracy_classifier.csv", names=['k', 'Accuracy'], skiprows=2, nrows=9)
+own_acc = pd.read_csv("topic01_team02/plots/Plots Accuracies/concat_accuracies.csv", names=['k', 'Accuracy'], skiprows=1, nrows=9)
+kdt_acc = pd.read_csv("topic01_team02/Accuracy results/KD Trees Scipy/accuracy_kd_scipy.csv", names=['k', 'Accuracy'], skiprows=1, nrows=9)
+cla_acc = pd.read_csv("topic01_team02/Accuracy results/KNearestClassifier/accuracy_classifier.csv", names=['k', 'Accuracy'], skiprows=2, nrows=9)
 
 # Set up the figure and axes
 fig, ax = plt.subplots()
