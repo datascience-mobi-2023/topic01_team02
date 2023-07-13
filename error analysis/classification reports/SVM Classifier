@@ -1,0 +1,39 @@
+import csv
+from matplotlib import pyplot as plt
+import pandas as pd
+import numpy as np
+from sklearn import metrics
+from sklearn.multioutput import ClassifierChain
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report
+
+# Load the MNIST train and test datasets
+train_data = pd.read_csv("../mnist_train.csv", header=None)
+test_data = pd.read_csv("../mnist_test.csv", header=None)
+
+train_labels = train_data.iloc[:, 0].to_numpy()
+train_data = train_data.iloc[:, 1:]
+
+test_labels = test_data.iloc[:, 0].to_numpy()
+test_data = test_data.iloc[:, 1:]
+
+# Train the SVM classifier on the training data
+svm_classifier = SVC(kernel='rbf', gamma='scale')
+svm_classifier.fit(train_data, train_labels)
+
+# Make predictions on the test data using the SVM classifier
+svm_predictions = svm_classifier.predict(test_data)
+
+# Calculate accuracy of the SVM classifier
+svm_accuracy = accuracy_score(test_labels, svm_predictions)
+print("Accuracy of SVM classifier:", svm_accuracy)
+
+# Evaluate the classifier on the test data using classification report
+y_pred = svm_classifier.predict(test_data)
+print(classification_report(test_labels, y_pred))
+
+disp = metrics.ConfusionMatrixDisplay.from_predictions(test_labels, y_pred)
+disp.figure_.suptitle("Confusion Matrix")
+print(f"Confusion matrix:\n{disp.confusion_matrix}")
+
+plt.show()
