@@ -1,15 +1,13 @@
-import csv
+
 from matplotlib import pyplot as plt
 import pandas as pd
-import numpy as np
 from sklearn import metrics
-from sklearn.multioutput import ClassifierChain
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, classification_report
 
 # Load the MNIST train and test datasets
-train_data = pd.read_csv("../mnist_train.csv", header=None)
-test_data = pd.read_csv("../mnist_test.csv", header=None)
+train_data = pd.read_csv("mnist_train.csv", header=None)
+test_data = pd.read_csv("mnist_test.csv", header=None)
 
 train_labels = train_data.iloc[:, 0].to_numpy()
 train_data = train_data.iloc[:, 1:]

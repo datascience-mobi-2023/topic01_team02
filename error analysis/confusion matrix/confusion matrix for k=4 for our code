@@ -2,15 +2,8 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-from scipy import spatial
-from scipy.stats import mode
 from sklearn.metrics import classification_report, confusion_matrix
 import matplotlib.pyplot as plt
-from sklearn.neighbors import NearestNeighbors, KNeighborsClassifier
-import csv
-import cv2
-from sklearn.svm import SVC
-import seaborn as sns
 from sklearn import metrics
 
 

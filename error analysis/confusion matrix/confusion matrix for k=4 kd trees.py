@@ -4,9 +4,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from scipy import spatial
 from scipy.stats import mode
-from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
-from sklearn import datasets, svm, metrics
+from sklearn import metrics
 
 train_data = pd.read_csv("../mnist_train.csv", header=None)
 test_data = pd.read_csv("../mnist_test.csv", header=None)

@@ -4,7 +4,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn import metrics
 
 train_data = pd.read_csv("../mnist_train.csv", header=None)
 test_data = pd.read_csv("../mnist_test.csv", header=None)

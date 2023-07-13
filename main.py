@@ -77,22 +77,22 @@ def main_KNN(test_point, train_data_points, train_data_points_labels, k):
     return int(predicted_label)
 
  # Calculate accuracy
- def calc_accuracy(k):
+def calc_accuracy(k):
     ctr = 0
-     for i in range(len(test_labels)):
+    for i in range(len(test_labels)):
          if main_KNN(test_data_pca[i], train_data_pca, train_labels, k) == test_labels[i]:
              ctr += 1
-     accuracy = ctr / len(test_labels)
-     return accuracy 
+    accuracy = ctr / len(test_labels)
+    return accuracy 
 
 
  # Identify best k-value
- list_of_accuracies = []
- for i in range(100):
+list_of_accuracies = []
+for i in range(100):
      list_of_accuracies.append(calc_accuracy(i))
 
- highest_accuracy = max(list_of_accuracies)
- print("Best k-value: " + str(list_of_accuracies.index(highest_accuracy)) + " Accuracy: " + str(highest_accuracy))
+highest_accuracy = max(list_of_accuracies)
+print("Best k-value: " + str(list_of_accuracies.index(highest_accuracy)) + " Accuracy: " + str(highest_accuracy))
 
 predicted_labels = []
 for i in range(len(test_labels)):
