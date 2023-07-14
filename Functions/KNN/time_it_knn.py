@@ -4,9 +4,6 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from collections import Counter
-from sklearn.metrics import confusion_matrix
-from sklearn import metrics
-from sklearn.linear_model import LogisticRegression
 import time
 
 train_data = pd.read_csv("mnist_train.csv")

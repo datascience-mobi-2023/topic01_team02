@@ -8,11 +8,11 @@ from collections import Counter
 train_data = pd.read_csv("mnist_train.csv", header=None)
 test_data = pd.read_csv("mnist_test.csv", header=None)
 
-train_labels = train_data.iloc[:,0]
-train_data = train_data.drop(['0'], axis=1)
+train_labels = train_data.iloc[:, 0]
+train_data = train_data.iloc[:, 1:] # Verwende alle Spalten außer der ersten und setze den Index zurück
 
 test_labels = test_data.iloc[:,0]
-test_data = test_data.drop(['0'], axis=1)
+test_data = test_data.iloc[:, 1:]
 
 for i in range(10):
     ax= plt.subplot(1,10 ,i+1)
@@ -76,26 +76,23 @@ def main_KNN(test_point, train_data_points, train_data_points_labels, k):
     predicted_label = most_common_label(k_nearest_labels)
     return int(predicted_label)
 
- # Calculate accuracy
-def calc_accuracy(k):
-    ctr = 0
-    for i in range(len(test_labels)):
-         if main_KNN(test_data_pca[i], train_data_pca, train_labels, k) == test_labels[i]:
-             ctr += 1
-    accuracy = ctr / len(test_labels)
-    return accuracy 
-
-
- # Identify best k-value
-list_of_accuracies = []
-for i in range(100):
-     list_of_accuracies.append(calc_accuracy(i))
-
-highest_accuracy = max(list_of_accuracies)
-print("Best k-value: " + str(list_of_accuracies.index(highest_accuracy)) + " Accuracy: " + str(highest_accuracy))
-
 predicted_labels = []
-for i in range(len(test_labels)):
-   result = main_KNN(test_data_pca[i], train_data_pca, train_labels, 3)
-   predicted_labels.append(result)
-   print(i)
+for i in range(len(test_data_pca)):
+    test_point = test_data_pca[i]
+    predicted_label = main_KNN(test_point, train_data_pca, train_labels, k=3)
+    predicted_labels.append(predicted_label)
+    print(predicted_label)
+
+# Create a dataframe to store the true and predicted labels
+results_df = pd.DataFrame({'True Label': test_labels, 'Predicted Label': predicted_labels})
+
+# Calculate accuracy for k=3
+accuracy = sum(results_df['True Label'] == results_df['Predicted Label']) / len(results_df) * 100
+print("Accuracy for k=3:", accuracy)
+
+# Save results to a CSV file
+results_df.to_csv('knn_results.csv', index=False)
+
+# Save accuracy to a separate CSV file
+accuracy_df = pd.DataFrame({'Accuracy': [accuracy]})
+accuracy_df.to_csv('knn_accuracy.csv', index=False)
