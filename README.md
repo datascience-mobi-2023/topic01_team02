@@ -1,3 +1,5 @@
-# team02 of topic01 
- This is the GitHub repository for team02 of the topic01.  
- To refresh your memory on how to manage GitHub, you can find commonly used commands [here](https://github.com/joshnh/Git-Commands). jsakjmsldc
+# Welcome
+Hello and welcome to our repository. We, Daria, Karolina and Alex, hope that everything is easy to find. Enjoy :) 
+
+# enviroments
+We have two enviroments because the tensorflow library only works with an older python version (3.7), but several other libraries only work with newer python versions. 
